@@ -21,12 +21,18 @@ import { Card } from '@/components/ui/card'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem } from '@/components/ui/pagination'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 // Hook Imports
+import { useSimulatedLoading } from '@/hooks/use-simulated-loading'
 import { usePagination } from '@/hooks/use-pagination'
 
+// Util Imports
+import { cn } from '@/lib/utils'
+
 const PAGE_SIZE = 10
+const SKELETON_ROWS = 5
 
 export type SimpleListViewProps<TData> = {
   title: string
@@ -36,6 +42,8 @@ export type SimpleListViewProps<TData> = {
   columns: ColumnDef<TData, any>[]
   data: TData[]
   emptyMessage?: string
+  onRowClick?: (row: TData) => void
+  onActionClick?: () => void
 }
 
 export function SimpleListView<TData>({
@@ -45,10 +53,13 @@ export function SimpleListView<TData>({
   actionLabel,
   columns,
   data,
-  emptyMessage = 'Nenhum registro encontrado.'
+  emptyMessage = 'Nenhum registro encontrado.',
+  onRowClick,
+  onActionClick
 }: SimpleListViewProps<TData>) {
   const [search, setSearch] = useState('')
   const [pageIndex, setPageIndex] = useState(0)
+  const isLoading = useSimulatedLoading(400)
 
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
@@ -85,6 +96,40 @@ export function SimpleListView<TData>({
     setPageIndex(0)
   }
 
+  if (isLoading) {
+    return (
+      <div className='flex flex-col gap-3 lg:gap-6'>
+        <div className='flex flex-col gap-1'>
+          <h1 className='text-xl font-semibold'>{title}</h1>
+          {description && <p className='text-muted-foreground text-sm'>{description}</p>}
+        </div>
+
+        <Card className='py-0 shadow-none'>
+          <div className='flex gap-4 border-b p-6 max-sm:flex-col sm:items-center sm:justify-between'>
+            <Skeleton className='h-9 w-full max-w-2xs' />
+            <Skeleton className='h-9 w-40' />
+          </div>
+
+          <div className='divide-y'>
+            {Array.from({ length: SKELETON_ROWS }).map((_, index) => (
+              <div key={index} className='flex items-center gap-4 px-4 py-3.5'>
+                <Skeleton className='h-4 flex-2' />
+                <Skeleton className='h-4 flex-1' />
+                <Skeleton className='h-4 flex-1' />
+                <Skeleton className='h-4 w-16 shrink-0' />
+              </div>
+            ))}
+          </div>
+
+          <div className='flex items-center justify-between gap-3 px-6 py-4'>
+            <Skeleton className='h-4 w-40' />
+            <Skeleton className='h-8 w-28' />
+          </div>
+        </Card>
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col gap-3 lg:gap-6'>
       <div className='flex flex-col gap-1'>
@@ -114,7 +159,7 @@ export function SimpleListView<TData>({
                 </InputGroup>
               </div>
 
-              <Button>
+              <Button onClick={onActionClick}>
                 <PlusIcon />
                 <span>{actionLabel}</span>
               </Button>
@@ -138,9 +183,19 @@ export function SimpleListView<TData>({
               <TableBody>
                 {table.getRowModel().rows.length ? (
                   table.getRowModel().rows.map(row => (
-                    <TableRow key={row.id}>
+                    <TableRow
+                      key={row.id}
+                      onClick={() => onRowClick?.(row.original)}
+                      className={cn(onRowClick && 'hover:bg-muted/50 cursor-pointer')}
+                    >
                       {row.getVisibleCells().map(cell => (
-                        <TableCell key={cell.id} className='first:pl-4 last:px-4 last:text-center'>
+                        <TableCell
+                          key={cell.id}
+                          className='first:pl-4 last:px-4 last:text-center'
+                          onClick={event => {
+                            if (cell.column.id === 'actions') event.stopPropagation()
+                          }}
+                        >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </TableCell>
                       ))}
