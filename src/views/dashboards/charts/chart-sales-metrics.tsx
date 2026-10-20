@@ -41,7 +41,7 @@ const salesChartData = Array.from({ length: totalBars }, (_, index) => {
 
 const salesChartConfig = {
   sales: {
-    label: 'Sales'
+    label: 'Vendas'
   }
 } satisfies ChartConfig
 
@@ -76,18 +76,18 @@ const revenueChartData = [
 
 const revenueChartConfig = {
   sales: {
-    label: 'Sales'
+    label: 'Vendas'
   },
   january: {
-    label: 'January',
+    label: 'Janeiro',
     color: 'var(--primary)'
   },
   february: {
-    label: 'February',
+    label: 'Fevereiro',
     color: 'color-mix(in oklab, var(--primary) 60%, transparent)'
   },
   march: {
-    label: 'March',
+    label: 'Março',
     color: 'color-mix(in oklab, var(--primary) 20%, transparent)'
   }
 } satisfies ChartConfig
@@ -154,7 +154,7 @@ const SalesMetricsCard = ({ className }: { className?: string }) => {
                                 y={(viewBox.cy || 0) - 12}
                                 className='fill-card-foreground text-lg font-medium'
                               >
-                                256.24
+                                256,24
                               </tspan>
                               <tspan
                                 x={viewBox.cx}

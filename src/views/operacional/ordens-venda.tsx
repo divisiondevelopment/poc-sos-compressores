@@ -25,8 +25,22 @@ const ordensVendaData: OrdemVenda[] = [
   { id: '1', codigo: 'OV-2041', cliente: 'Posto Estrela Azul', valor: 8450, data: '2026-09-27', status: 'Faturada' },
   { id: '2', codigo: 'OV-2040', cliente: 'Frigorífico Vale Verde', valor: 15200, data: '2026-09-24', status: 'Aberta' },
   { id: '3', codigo: 'OV-2039', cliente: 'Construtora Horizonte', valor: 4300, data: '2026-09-20', status: 'Faturada' },
-  { id: '4', codigo: 'OV-2038', cliente: 'Transportadora Rota Sul', valor: 22750, data: '2026-09-14', status: 'Cancelada' },
-  { id: '5', codigo: 'OV-2037', cliente: 'Indústria Metalcorte Ltda', valor: 9890, data: '2026-09-08', status: 'Faturada' }
+  {
+    id: '4',
+    codigo: 'OV-2038',
+    cliente: 'Transportadora Rota Sul',
+    valor: 22750,
+    data: '2026-09-14',
+    status: 'Cancelada'
+  },
+  {
+    id: '5',
+    codigo: 'OV-2037',
+    cliente: 'Indústria Metalcorte Ltda',
+    valor: 9890,
+    data: '2026-09-08',
+    status: 'Faturada'
+  }
 ]
 
 const columns: ColumnDef<OrdemVenda>[] = [
@@ -40,7 +54,7 @@ const columns: ColumnDef<OrdemVenda>[] = [
   {
     accessorKey: 'data',
     header: 'Data',
-    cell: ({ row }) => <span>{format(new Date(row.original.data), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => <span>{format(new Date(`${row.original.data}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
   },
   {
     accessorKey: 'status',

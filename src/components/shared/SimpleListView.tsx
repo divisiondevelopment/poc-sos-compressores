@@ -5,7 +5,13 @@ import { useState } from 'react'
 
 // Third-party Imports
 import type { ColumnDef } from '@tanstack/react-table'
-import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table'
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  useReactTable
+} from '@tanstack/react-table'
 
 import { ChevronLeftIcon, ChevronRightIcon, PlusIcon, SearchIcon } from 'lucide-react'
 

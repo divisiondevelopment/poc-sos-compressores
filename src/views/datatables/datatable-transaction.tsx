@@ -56,7 +56,7 @@ export const columns: ColumnDef<Item>[] = [
     cell: ({ row }) => (
       <div className='flex items-center gap-2'>
         <Avatar className='size-9'>
-          <AvatarImage src={row.original.avatar} alt='Hallie Richards' />
+          <AvatarImage src={row.original.avatar} alt={row.original.name} />
           <AvatarFallback className='text-xs'>{row.original.avatarFallback}</AvatarFallback>
         </Avatar>
         <div className='flex flex-col text-sm'>
@@ -92,7 +92,7 @@ export const columns: ColumnDef<Item>[] = [
         src={
           row.getValue('paidBy') === 'mastercard' ? '/images/datatable/image-1.webp' : '/images/datatable/image-2.webp'
         }
-        alt='Payment platform'
+        alt='Forma de pagamento'
         className='w-10.5'
       />
     )
@@ -175,8 +175,7 @@ const TransactionDatatable = ({ data }: { data: Item[] }) => {
 
       <div className='flex items-center justify-between gap-3 px-6 py-4 max-sm:flex-col md:max-lg:flex-col'>
         <p className='text-muted-foreground text-sm whitespace-nowrap' aria-live='polite'>
-          Exibindo{' '}
-          <span>{table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}</span> a{' '}
+          Exibindo <span>{table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1}</span> a{' '}
           <span>
             {Math.min(
               Math.max(
@@ -260,7 +259,7 @@ export default TransactionDatatable
 function RowActions() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button size='icon' variant='ghost' aria-label='Edit item' />}>
+      <DropdownMenuTrigger render={<Button size='icon' variant='ghost' aria-label='Abrir ações' />}>
         <EllipsisVerticalIcon className='size-5' aria-hidden='true' />
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>

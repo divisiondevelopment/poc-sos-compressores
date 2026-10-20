@@ -19,11 +19,46 @@ type OrdemServico = {
 }
 
 const ordensServicoData: OrdemServico[] = [
-  { id: '1', codigo: 'OS-1042', cliente: 'Metalúrgica Reis', equipamento: 'Compressor Parafuso 50HP', data: '2026-09-28', status: 'Em andamento' },
-  { id: '2', codigo: 'OS-1041', cliente: 'Frigorífico Vale Verde', equipamento: 'Compressor Pistão 10HP', data: '2026-09-25', status: 'Concluída' },
-  { id: '3', codigo: 'OS-1040', cliente: 'Posto Estrela Azul', equipamento: 'Compressor Parafuso 20HP', data: '2026-09-22', status: 'Aberta' },
-  { id: '4', codigo: 'OS-1039', cliente: 'Transportadora Rota Sul', equipamento: 'Compressor Parafuso 75HP', data: '2026-09-18', status: 'Concluída' },
-  { id: '5', codigo: 'OS-1038', cliente: 'Construtora Horizonte', equipamento: 'Compressor Pistão 15HP', data: '2026-09-15', status: 'Cancelada' },
+  {
+    id: '1',
+    codigo: 'OS-1042',
+    cliente: 'Metalúrgica Reis',
+    equipamento: 'Compressor Parafuso 50HP',
+    data: '2026-09-28',
+    status: 'Em andamento'
+  },
+  {
+    id: '2',
+    codigo: 'OS-1041',
+    cliente: 'Frigorífico Vale Verde',
+    equipamento: 'Compressor Pistão 10HP',
+    data: '2026-09-25',
+    status: 'Concluída'
+  },
+  {
+    id: '3',
+    codigo: 'OS-1040',
+    cliente: 'Posto Estrela Azul',
+    equipamento: 'Compressor Parafuso 20HP',
+    data: '2026-09-22',
+    status: 'Aberta'
+  },
+  {
+    id: '4',
+    codigo: 'OS-1039',
+    cliente: 'Transportadora Rota Sul',
+    equipamento: 'Compressor Parafuso 75HP',
+    data: '2026-09-18',
+    status: 'Concluída'
+  },
+  {
+    id: '5',
+    codigo: 'OS-1038',
+    cliente: 'Construtora Horizonte',
+    equipamento: 'Compressor Pistão 15HP',
+    data: '2026-09-15',
+    status: 'Cancelada'
+  },
   {
     id: '6',
     codigo: 'OS-1037',
@@ -41,7 +76,7 @@ const columns: ColumnDef<OrdemServico>[] = [
   {
     accessorKey: 'data',
     header: 'Data',
-    cell: ({ row }) => <span>{format(new Date(row.original.data), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => <span>{format(new Date(`${row.original.data}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
   },
   {
     accessorKey: 'status',

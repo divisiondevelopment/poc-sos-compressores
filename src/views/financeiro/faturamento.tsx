@@ -23,10 +23,38 @@ type NotaFiscal = {
 
 const notasFiscaisData: NotaFiscal[] = [
   { id: '1', numero: 'NF-00512', cliente: 'Posto Estrela Azul', valor: 8450, emissao: '2026-09-27', status: 'Emitida' },
-  { id: '2', numero: 'NF-00511', cliente: 'Frigorífico Vale Verde', valor: 15200, emissao: '2026-09-24', status: 'Emitida' },
-  { id: '3', numero: 'NF-00510', cliente: 'Construtora Horizonte', valor: 4300, emissao: '2026-09-20', status: 'Cancelada' },
-  { id: '4', numero: 'NF-00509', cliente: 'Transportadora Rota Sul', valor: 22750, emissao: '2026-09-14', status: 'Emitida' },
-  { id: '5', numero: 'NF-00508', cliente: 'Indústria Metalcorte Ltda', valor: 9890, emissao: '2026-09-08', status: 'Emitida' }
+  {
+    id: '2',
+    numero: 'NF-00511',
+    cliente: 'Frigorífico Vale Verde',
+    valor: 15200,
+    emissao: '2026-09-24',
+    status: 'Emitida'
+  },
+  {
+    id: '3',
+    numero: 'NF-00510',
+    cliente: 'Construtora Horizonte',
+    valor: 4300,
+    emissao: '2026-09-20',
+    status: 'Cancelada'
+  },
+  {
+    id: '4',
+    numero: 'NF-00509',
+    cliente: 'Transportadora Rota Sul',
+    valor: 22750,
+    emissao: '2026-09-14',
+    status: 'Emitida'
+  },
+  {
+    id: '5',
+    numero: 'NF-00508',
+    cliente: 'Indústria Metalcorte Ltda',
+    valor: 9890,
+    emissao: '2026-09-08',
+    status: 'Emitida'
+  }
 ]
 
 const columns: ColumnDef<NotaFiscal>[] = [
@@ -40,7 +68,9 @@ const columns: ColumnDef<NotaFiscal>[] = [
   {
     accessorKey: 'emissao',
     header: 'Emissão',
-    cell: ({ row }) => <span>{format(new Date(row.original.emissao), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => (
+      <span>{format(new Date(`${row.original.emissao}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
+    )
   },
   {
     accessorKey: 'status',

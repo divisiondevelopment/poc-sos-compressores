@@ -21,10 +21,28 @@ type LancamentoBancario = {
 }
 
 const lancamentosData: LancamentoBancario[] = [
-  { id: '1', data: '2026-09-28', descricao: 'Recebimento NF-00512 - Posto Estrela Azul', valor: 8450, status: 'Conciliado' },
-  { id: '2', data: '2026-09-27', descricao: 'Pagamento BL-6999 - Frigorífico Vale Verde', valor: -15200, status: 'Pendente' },
+  {
+    id: '1',
+    data: '2026-09-28',
+    descricao: 'Recebimento NF-00512 - Posto Estrela Azul',
+    valor: 8450,
+    status: 'Conciliado'
+  },
+  {
+    id: '2',
+    data: '2026-09-27',
+    descricao: 'Pagamento BL-6999 - Frigorífico Vale Verde',
+    valor: -15200,
+    status: 'Pendente'
+  },
   { id: '3', data: '2026-09-26', descricao: 'Tarifa bancária', valor: -45.9, status: 'Conciliado' },
-  { id: '4', data: '2026-09-25', descricao: 'Recebimento NF-00509 - Transportadora Rota Sul', valor: 22750, status: 'Pendente' },
+  {
+    id: '4',
+    data: '2026-09-25',
+    descricao: 'Recebimento NF-00509 - Transportadora Rota Sul',
+    valor: 22750,
+    status: 'Pendente'
+  },
   { id: '5', data: '2026-09-24', descricao: 'Pagamento fornecedor OC-3050', valor: -3200, status: 'Conciliado' }
 ]
 
@@ -32,7 +50,7 @@ const columns: ColumnDef<LancamentoBancario>[] = [
   {
     accessorKey: 'data',
     header: 'Data',
-    cell: ({ row }) => <span>{format(new Date(row.original.data), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => <span>{format(new Date(`${row.original.data}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
   },
   { accessorKey: 'descricao', header: 'Descrição' },
   {

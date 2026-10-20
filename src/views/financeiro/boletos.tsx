@@ -22,11 +22,46 @@ type Boleto = {
 }
 
 const boletosData: Boleto[] = [
-  { id: '1', documento: 'BL-7001', destinatario: 'Posto Estrela Azul', valor: 8450, vencimento: '2026-10-05', status: 'Pendente' },
-  { id: '2', documento: 'BL-7000', destinatario: 'Compressores Brasil Peças Ltda', valor: 12300, vencimento: '2026-09-30', status: 'Pago' },
-  { id: '3', documento: 'BL-6999', destinatario: 'Frigorífico Vale Verde', valor: 15200, vencimento: '2026-09-25', status: 'Vencido' },
-  { id: '4', documento: 'BL-6998', destinatario: 'Lubrificantes Industriais SA', valor: 3200, vencimento: '2026-09-20', status: 'Pago' },
-  { id: '5', documento: 'BL-6997', destinatario: 'Transportadora Rota Sul', valor: 22750, vencimento: '2026-10-10', status: 'Pendente' }
+  {
+    id: '1',
+    documento: 'BL-7001',
+    destinatario: 'Posto Estrela Azul',
+    valor: 8450,
+    vencimento: '2026-10-05',
+    status: 'Pendente'
+  },
+  {
+    id: '2',
+    documento: 'BL-7000',
+    destinatario: 'Compressores Brasil Peças Ltda',
+    valor: 12300,
+    vencimento: '2026-09-30',
+    status: 'Pago'
+  },
+  {
+    id: '3',
+    documento: 'BL-6999',
+    destinatario: 'Frigorífico Vale Verde',
+    valor: 15200,
+    vencimento: '2026-09-25',
+    status: 'Vencido'
+  },
+  {
+    id: '4',
+    documento: 'BL-6998',
+    destinatario: 'Lubrificantes Industriais SA',
+    valor: 3200,
+    vencimento: '2026-09-20',
+    status: 'Pago'
+  },
+  {
+    id: '5',
+    documento: 'BL-6997',
+    destinatario: 'Transportadora Rota Sul',
+    valor: 22750,
+    vencimento: '2026-10-10',
+    status: 'Pendente'
+  }
 ]
 
 const columns: ColumnDef<Boleto>[] = [
@@ -40,7 +75,9 @@ const columns: ColumnDef<Boleto>[] = [
   {
     accessorKey: 'vencimento',
     header: 'Vencimento',
-    cell: ({ row }) => <span>{format(new Date(row.original.vencimento), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => (
+      <span>{format(new Date(`${row.original.vencimento}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
+    )
   },
   {
     accessorKey: 'status',

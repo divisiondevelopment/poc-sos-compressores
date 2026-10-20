@@ -19,7 +19,7 @@ const productReachChartData = [
 
 const productReachChartConfig = {
   reached: {
-    label: 'Reached',
+    label: 'Alcançado',
     color: 'var(--primary)'
   }
 } satisfies ChartConfig
@@ -35,7 +35,7 @@ const orderPlacedChartData = [
 
 const orderPlacedChartConfig = {
   orders: {
-    label: 'Orders',
+    label: 'Pedidos',
     color: 'color-mix(in oklab, var(--primary) 10%, transparent)'
   }
 } satisfies ChartConfig
@@ -48,7 +48,7 @@ const ProductInsightsCard = ({ className }: { className?: string }) => {
           <span className='text-lg font-semibold'>Insights do produto</span>
           <span className='text-muted-foreground text-sm'>Publicado em 12 mai. 2025 - 18:10</span>
         </div>
-        <img src='/images/widgets/image-7.webp' alt='Product' className='w-20.5 rounded-md' />
+        <img src='/images/widgets/image-7.webp' alt='Produto' className='w-20.5 rounded-md' />
       </CardHeader>
       <CardContent>
         <Separator />
@@ -57,7 +57,7 @@ const ProductInsightsCard = ({ className }: { className?: string }) => {
         <div className='flex items-center justify-between gap-1'>
           <div className='flex flex-col gap-1'>
             <span className='text-xs'>Alcance do produto</span>
-            <span className='text-2xl font-semibold'>21,153</span>
+            <span className='text-2xl font-semibold'>21.153</span>
           </div>
           <ChartContainer config={productReachChartConfig} className='min-h-13 max-w-18'>
             <BarChart accessibilityLayer data={productReachChartData} barSize={8}>
@@ -69,7 +69,7 @@ const ProductInsightsCard = ({ className }: { className?: string }) => {
         <div className='flex items-center justify-between gap-1'>
           <div className='flex flex-col gap-1'>
             <span className='text-xs'>Pedidos realizados</span>
-            <span className='text-2xl font-semibold'>2,123</span>
+            <span className='text-2xl font-semibold'>2.123</span>
           </div>
           <ChartContainer config={orderPlacedChartConfig} className='min-h-13 max-w-18'>
             <BarChart accessibilityLayer data={orderPlacedChartData} barSize={8}>

@@ -19,8 +19,22 @@ type Funcionario = {
 }
 
 const funcionariosData: Funcionario[] = [
-  { id: '1', nome: 'Carlos Eduardo Santos', cargo: 'Técnico de Manutenção', setor: 'Operacional', admissao: '2021-03-15', status: 'Ativo' },
-  { id: '2', nome: 'Marina Oliveira Costa', cargo: 'Analista Financeiro', setor: 'Financeiro', admissao: '2020-07-01', status: 'Ativo' },
+  {
+    id: '1',
+    nome: 'Carlos Eduardo Santos',
+    cargo: 'Técnico de Manutenção',
+    setor: 'Operacional',
+    admissao: '2021-03-15',
+    status: 'Ativo'
+  },
+  {
+    id: '2',
+    nome: 'Marina Oliveira Costa',
+    cargo: 'Analista Financeiro',
+    setor: 'Financeiro',
+    admissao: '2020-07-01',
+    status: 'Ativo'
+  },
   { id: '3', nome: 'Roberto Almeida', cargo: 'Vendedor', setor: 'Comercial', admissao: '2022-01-10', status: 'Ativo' },
   { id: '4', nome: 'Fernanda Lima', cargo: 'Almoxarife', setor: 'Estoque', admissao: '2019-11-20', status: 'Ativo' },
   {
@@ -31,7 +45,14 @@ const funcionariosData: Funcionario[] = [
     admissao: '2023-05-02',
     status: 'Inativo'
   },
-  { id: '6', nome: 'Juliana Ribeiro', cargo: 'Assistente Administrativo', setor: 'Administrativo', admissao: '2022-09-12', status: 'Ativo' }
+  {
+    id: '6',
+    nome: 'Juliana Ribeiro',
+    cargo: 'Assistente Administrativo',
+    setor: 'Administrativo',
+    admissao: '2022-09-12',
+    status: 'Ativo'
+  }
 ]
 
 const columns: ColumnDef<Funcionario>[] = [
@@ -49,7 +70,9 @@ const columns: ColumnDef<Funcionario>[] = [
   {
     accessorKey: 'admissao',
     header: 'Admissão',
-    cell: ({ row }) => <span>{format(new Date(row.original.admissao), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => (
+      <span>{format(new Date(`${row.original.admissao}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
+    )
   },
   {
     accessorKey: 'status',

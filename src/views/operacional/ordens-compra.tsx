@@ -22,11 +22,39 @@ type OrdemCompra = {
 }
 
 const ordensCompraData: OrdemCompra[] = [
-  { id: '1', codigo: 'OC-3051', fornecedor: 'Compressores Brasil Peças Ltda', valor: 12300, data: '2026-09-26', status: 'Recebida' },
-  { id: '2', codigo: 'OC-3050', fornecedor: 'Lubrificantes Industriais SA', valor: 3200, data: '2026-09-23', status: 'Recebida' },
-  { id: '3', codigo: 'OC-3049', fornecedor: 'Correias e Filtros Ltda', valor: 1850, data: '2026-09-19', status: 'Aberta' },
+  {
+    id: '1',
+    codigo: 'OC-3051',
+    fornecedor: 'Compressores Brasil Peças Ltda',
+    valor: 12300,
+    data: '2026-09-26',
+    status: 'Recebida'
+  },
+  {
+    id: '2',
+    codigo: 'OC-3050',
+    fornecedor: 'Lubrificantes Industriais SA',
+    valor: 3200,
+    data: '2026-09-23',
+    status: 'Recebida'
+  },
+  {
+    id: '3',
+    codigo: 'OC-3049',
+    fornecedor: 'Correias e Filtros Ltda',
+    valor: 1850,
+    data: '2026-09-19',
+    status: 'Aberta'
+  },
   { id: '4', codigo: 'OC-3048', fornecedor: 'Metalúrgica Reis', valor: 7600, data: '2026-09-12', status: 'Cancelada' },
-  { id: '5', codigo: 'OC-3047', fornecedor: 'Distribuidora Ar Comprimido', valor: 5400, data: '2026-09-05', status: 'Recebida' }
+  {
+    id: '5',
+    codigo: 'OC-3047',
+    fornecedor: 'Distribuidora Ar Comprimido',
+    valor: 5400,
+    data: '2026-09-05',
+    status: 'Recebida'
+  }
 ]
 
 const columns: ColumnDef<OrdemCompra>[] = [
@@ -40,7 +68,7 @@ const columns: ColumnDef<OrdemCompra>[] = [
   {
     accessorKey: 'data',
     header: 'Data',
-    cell: ({ row }) => <span>{format(new Date(row.original.data), 'dd MMM yyyy', { locale: ptBR })}</span>
+    cell: ({ row }) => <span>{format(new Date(`${row.original.data}T00:00:00`), 'dd MMM yyyy', { locale: ptBR })}</span>
   },
   {
     accessorKey: 'status',

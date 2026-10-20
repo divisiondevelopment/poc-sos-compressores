@@ -17,11 +17,41 @@ type LogEvento = {
 }
 
 const logsData: LogEvento[] = [
-  { id: '1', dataHora: '2026-09-28T14:32:00', usuario: 'Carlos Eduardo Santos', acao: 'Atualizou ordem de serviço OS-1042', modulo: 'Operacional' },
-  { id: '2', dataHora: '2026-09-28T11:05:00', usuario: 'Marina Oliveira Costa', acao: 'Emitiu nota fiscal NF-00512', modulo: 'Financeiro' },
-  { id: '3', dataHora: '2026-09-27T17:40:00', usuario: 'Fernanda Lima', acao: 'Registrou ajuste de estoque', modulo: 'Estoque' },
-  { id: '4', dataHora: '2026-09-27T09:15:00', usuario: 'Roberto Almeida', acao: 'Criou cliente Posto Estrela Azul', modulo: 'Cadastros' },
-  { id: '5', dataHora: '2026-09-26T16:02:00', usuario: 'Juliana Ribeiro', acao: 'Alterou permissões de usuário', modulo: 'Configurações' }
+  {
+    id: '1',
+    dataHora: '2026-09-28T14:32:00',
+    usuario: 'Carlos Eduardo Santos',
+    acao: 'Atualizou ordem de serviço OS-1042',
+    modulo: 'Operacional'
+  },
+  {
+    id: '2',
+    dataHora: '2026-09-28T11:05:00',
+    usuario: 'Marina Oliveira Costa',
+    acao: 'Emitiu nota fiscal NF-00512',
+    modulo: 'Financeiro'
+  },
+  {
+    id: '3',
+    dataHora: '2026-09-27T17:40:00',
+    usuario: 'Fernanda Lima',
+    acao: 'Registrou ajuste de estoque',
+    modulo: 'Estoque'
+  },
+  {
+    id: '4',
+    dataHora: '2026-09-27T09:15:00',
+    usuario: 'Roberto Almeida',
+    acao: 'Criou cliente Posto Estrela Azul',
+    modulo: 'Cadastros'
+  },
+  {
+    id: '5',
+    dataHora: '2026-09-26T16:02:00',
+    usuario: 'Juliana Ribeiro',
+    acao: 'Alterou permissões de usuário',
+    modulo: 'Configurações'
+  }
 ]
 
 const columns: ColumnDef<LogEvento>[] = [

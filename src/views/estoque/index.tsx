@@ -16,12 +16,54 @@ type ItemEstoque = {
 }
 
 const itensData: ItemEstoque[] = [
-  { id: '1', codigo: 'PC-1001', nome: 'Compressor Parafuso 50HP', categoria: 'Equipamentos', quantidade: 4, status: 'Em estoque' },
-  { id: '2', codigo: 'PC-1002', nome: 'Filtro de Ar FA-220', categoria: 'Filtros', quantidade: 2, status: 'Estoque baixo' },
-  { id: '3', codigo: 'PC-1003', nome: 'Óleo Lubrificante Sintético 5L', categoria: 'Lubrificantes', quantidade: 18, status: 'Em estoque' },
-  { id: '4', codigo: 'PC-1004', nome: 'Correia Industrial B-52', categoria: 'Correias', quantidade: 0, status: 'Sem estoque' },
-  { id: '5', codigo: 'PC-1005', nome: 'Válvula de Segurança 1/2"', categoria: 'Peças', quantidade: 9, status: 'Em estoque' },
-  { id: '6', codigo: 'PC-1006', nome: 'Kit Reparo Compressor Pistão', categoria: 'Peças', quantidade: 3, status: 'Estoque baixo' }
+  {
+    id: '1',
+    codigo: 'PC-1001',
+    nome: 'Compressor Parafuso 50HP',
+    categoria: 'Equipamentos',
+    quantidade: 4,
+    status: 'Em estoque'
+  },
+  {
+    id: '2',
+    codigo: 'PC-1002',
+    nome: 'Filtro de Ar FA-220',
+    categoria: 'Filtros',
+    quantidade: 2,
+    status: 'Estoque baixo'
+  },
+  {
+    id: '3',
+    codigo: 'PC-1003',
+    nome: 'Óleo Lubrificante Sintético 5L',
+    categoria: 'Lubrificantes',
+    quantidade: 18,
+    status: 'Em estoque'
+  },
+  {
+    id: '4',
+    codigo: 'PC-1004',
+    nome: 'Correia Industrial B-52',
+    categoria: 'Correias',
+    quantidade: 0,
+    status: 'Sem estoque'
+  },
+  {
+    id: '5',
+    codigo: 'PC-1005',
+    nome: 'Válvula de Segurança 1/2"',
+    categoria: 'Peças',
+    quantidade: 9,
+    status: 'Em estoque'
+  },
+  {
+    id: '6',
+    codigo: 'PC-1006',
+    nome: 'Kit Reparo Compressor Pistão',
+    categoria: 'Peças',
+    quantidade: 3,
+    status: 'Estoque baixo'
+  }
 ]
 
 const columns: ColumnDef<ItemEstoque>[] = [

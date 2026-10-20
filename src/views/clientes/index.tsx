@@ -16,7 +16,14 @@ type Cliente = {
 }
 
 const clientesData: Cliente[] = [
-  { id: '1', nome: 'João Pereira', documento: '123.456.789-00', cidade: 'São Paulo - SP', telefone: '(11) 98765-4321', status: 'Ativo' },
+  {
+    id: '1',
+    nome: 'João Pereira',
+    documento: '123.456.789-00',
+    cidade: 'São Paulo - SP',
+    telefone: '(11) 98765-4321',
+    status: 'Ativo'
+  },
   {
     id: '2',
     nome: 'Indústria Metalcorte Ltda',

@@ -1,4 +1,4 @@
-import { TruckIcon, TriangleAlertIcon, CalendarX2Icon } from 'lucide-react'
+import { WrenchIcon, TriangleAlertIcon, CalendarX2Icon } from 'lucide-react'
 
 import { Card } from '@/components/ui/card'
 
@@ -13,22 +13,22 @@ import { formatCurrencyBRL } from '@/lib/utils'
 // Statistics card data
 const StatisticsCardData = [
   {
-    icon: <TruckIcon className='size-4' />,
+    icon: <WrenchIcon className='size-4' />,
     value: '36',
     title: 'Ordens de Serviço Concluídas',
-    changePercentage: '+12.4%'
+    changePercentage: '+12,4%'
   },
   {
     icon: <TriangleAlertIcon className='size-4' />,
     value: '5',
     title: 'Equipamentos com Avaria',
-    changePercentage: '-6.1%'
+    changePercentage: '-6,1%'
   },
   {
     icon: <CalendarX2Icon className='size-4' />,
     value: '9',
     title: 'Entregas Atrasadas',
-    changePercentage: '+2.8%'
+    changePercentage: '+2,8%'
   }
 ]
 
