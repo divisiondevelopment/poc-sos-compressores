@@ -2,11 +2,11 @@
 
 // Third-party Imports
 import type { ColumnDef } from '@tanstack/react-table'
-import { useNavigate } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { EllipsisVerticalIcon } from 'lucide-react'
+import { EllipsisVerticalIcon, EyeIcon } from 'lucide-react'
 import { toast } from 'sonner'
 
 // Component Imports
@@ -16,6 +16,7 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { SimpleListView } from '@/components/shared/SimpleListView'
@@ -32,6 +33,11 @@ function OrdemServicoRowActions({ ordem }: { ordem: OrdemServico }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
         <DropdownMenuGroup>
+          <DropdownMenuItem render={<Link to='/ordens-servico/$id' params={{ id: ordem.id }} />}>
+            <EyeIcon className='size-4' />
+            <span>Visualizar</span>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => toast.success(`Ordem de serviço ${ordem.codigo} atualizada com sucesso`)}>
             <span>Editar</span>
           </DropdownMenuItem>
