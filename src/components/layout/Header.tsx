@@ -4,10 +4,9 @@ import { Fragment } from 'react'
 // Third-party Imports
 import { useLocation } from '@tanstack/react-router'
 
-import { SearchIcon } from 'lucide-react'
-
 // Component Imports
 import ModeToggle from '@/components/layout/ModeToggle'
+import { CommandPalette } from '@/components/shared/CommandPalette'
 import ProfileDropdown from '@/components/shared/ProfileDropdown'
 import {
   Breadcrumb,
@@ -17,7 +16,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
-import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 
@@ -52,15 +50,7 @@ const Header = () => {
           </Breadcrumb>
         </div>
 
-        {/* Global search — visual only for now, no search logic wired up yet */}
-        <div className='hidden flex-1 justify-center sm:flex'>
-          <InputGroup className='max-w-sm'>
-            <InputGroupAddon>
-              <SearchIcon />
-            </InputGroupAddon>
-            <InputGroupInput placeholder='Buscar OS, cliente, fornecedor, peça...' />
-          </InputGroup>
-        </div>
+        <CommandPalette />
 
         <div className='flex items-center gap-1.5'>
           <ModeToggle />
