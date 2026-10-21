@@ -1,5 +1,8 @@
 'use client'
 
+// React Imports
+import { useState } from 'react'
+
 // Third-party Imports
 import { PhoneIcon, MapPinIcon } from 'lucide-react'
 import { toast } from 'sonner'
@@ -14,12 +17,16 @@ import { StatusBadge } from '@/components/shared/StatusBadge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import { OrdemServicoFormDialog } from '@/views/operacional/ordem-servico-form/ordem-servico-form-dialog'
 
 export interface OrdemServicoLeftPanelProps {
   ordem: OrdemServico
+  onSaved?: () => void
 }
 
-export function OrdemServicoLeftPanel({ ordem }: OrdemServicoLeftPanelProps) {
+export function OrdemServicoLeftPanel({ ordem, onSaved }: OrdemServicoLeftPanelProps) {
+  const [editOpen, setEditOpen] = useState(false)
+
   const detailRows = [
     { label: 'Técnico responsável', value: ordem.tecnico },
     { label: 'Equipamento', value: ordem.equipamento },
@@ -62,10 +69,7 @@ export function OrdemServicoLeftPanel({ ordem }: OrdemServicoLeftPanelProps) {
         </div>
 
         <div className='flex gap-2 max-sm:flex-col'>
-          <Button
-            className='sm:flex-1'
-            onClick={() => toast.success(`Ordem de serviço ${ordem.codigo} atualizada com sucesso`)}
-          >
+          <Button className='sm:flex-1' onClick={() => setEditOpen(true)}>
             Editar
           </Button>
           <Button
@@ -84,6 +88,7 @@ export function OrdemServicoLeftPanel({ ordem }: OrdemServicoLeftPanelProps) {
           </Button>
         </div>
       </CardContent>
+      <OrdemServicoFormDialog open={editOpen} onOpenChange={setEditOpen} ordem={ordem} onSaved={onSaved} />
     </Card>
   )
 }

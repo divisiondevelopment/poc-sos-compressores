@@ -88,7 +88,8 @@ const RegisterForm = () => {
         <Field orientation='horizontal' className='flex items-center gap-2'>
           <Checkbox id='privacyPolicy' />
           <FieldLabel htmlFor='privacyPolicy'>
-            <span className='text-muted-foreground'>Eu concordo com</span> <a href='#'>a política de privacidade e termos</a>
+            <span className='text-muted-foreground'>Eu concordo com</span>{' '}
+            <a href='#'>a política de privacidade e termos</a>
           </FieldLabel>
         </Field>
         <Field>

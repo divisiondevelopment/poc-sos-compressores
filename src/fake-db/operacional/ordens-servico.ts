@@ -136,6 +136,62 @@ export const ordensServicoData: OrdemServico[] = [
       { data: '2026-09-09', status: 'Em andamento' },
       { data: '2026-09-10', status: 'Concluída', observacao: 'Equipamento entregue ao cliente' }
     ]
+  },
+  {
+    id: '7',
+    codigo: 'OS-1031',
+    cliente: 'Metalúrgica Reis',
+    equipamento: 'Compressor Parafuso 50HP',
+    data: '2026-08-20',
+    status: 'Concluída',
+    tecnico: 'Carlos Eduardo Santos',
+    clienteContato: '(31) 3344-5566',
+    clienteEndereco: 'Rua das Indústrias, 450 - Belo Horizonte - MG',
+    itens: [
+      { id: '7-1', descricao: 'Revisão preventiva 4.000h', quantidade: 1, valorUnitario: 720 },
+      { id: '7-2', descricao: 'Filtro separador de óleo', quantidade: 1, valorUnitario: 310 },
+      { id: '7-3', descricao: 'Mão de obra técnica especializada', quantidade: 3, valorUnitario: 120 }
+    ],
+    historico: [
+      { data: '2026-08-17', status: 'Aberta' },
+      { data: '2026-08-19', status: 'Em andamento', observacao: 'Equipamento parado para revisão' },
+      { data: '2026-08-20', status: 'Concluída', observacao: 'Revisão concluída e equipamento liberado' }
+    ]
+  },
+  {
+    id: '8',
+    codigo: 'OS-1024',
+    cliente: 'Metalúrgica Reis',
+    equipamento: 'Compressor Pistão 10HP',
+    data: '2026-07-08',
+    status: 'Concluída',
+    tecnico: 'Paulo Henrique Souza',
+    clienteContato: '(31) 3344-5566',
+    clienteEndereco: 'Rua das Indústrias, 450 - Belo Horizonte - MG',
+    itens: [
+      { id: '8-1', descricao: 'Troca de correia e polia', quantidade: 1, valorUnitario: 260 },
+      { id: '8-2', descricao: 'Mão de obra técnica especializada', quantidade: 2, valorUnitario: 120 }
+    ],
+    historico: [
+      { data: '2026-07-06', status: 'Aberta', observacao: 'Ruído excessivo na correia' },
+      { data: '2026-07-08', status: 'Concluída', observacao: 'Correia substituída' }
+    ]
+  },
+  {
+    id: '9',
+    codigo: 'OS-1012',
+    cliente: 'Metalúrgica Reis',
+    equipamento: 'Compressor Parafuso 50HP',
+    data: '2026-05-14',
+    status: 'Cancelada',
+    tecnico: 'Carlos Eduardo Santos',
+    clienteContato: '(31) 3344-5566',
+    clienteEndereco: 'Rua das Indústrias, 450 - Belo Horizonte - MG',
+    itens: [{ id: '9-1', descricao: 'Diagnóstico de queda de pressão', quantidade: 1, valorUnitario: 150 }],
+    historico: [
+      { data: '2026-05-12', status: 'Aberta' },
+      { data: '2026-05-14', status: 'Cancelada', observacao: 'Cliente resolveu internamente' }
+    ]
   }
 ]
 

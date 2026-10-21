@@ -1,7 +1,8 @@
 'use client'
 
 // React Imports
-import React, { useMemo } from 'react'
+import type React from 'react';
+import { useMemo } from 'react'
 
 // Third-party Imports
 import {

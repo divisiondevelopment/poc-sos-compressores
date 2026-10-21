@@ -1,8 +1,9 @@
 'use client'
 
 // Third-party Imports
+import { useState } from 'react'
+
 import type { ColumnDef } from '@tanstack/react-table'
-import { Link, useNavigate } from '@tanstack/react-router'
 
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -22,10 +23,12 @@ import {
 import { SimpleListView } from '@/components/shared/SimpleListView'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 
+import { OrdemServicoFormDialog } from '@/views/operacional/ordem-servico-form/ordem-servico-form-dialog'
+
 // Data Imports
 import { ordensServicoData, type OrdemServico } from '@/fake-db/operacional/ordens-servico'
 
-function OrdemServicoRowActions({ ordem }: { ordem: OrdemServico }) {
+function OrdemServicoRowActions({ ordem, onEdit }: { ordem: OrdemServico; onEdit: (ordem: OrdemServico) => void }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button size='icon' variant='ghost' aria-label='Abrir ações' />}>
@@ -33,12 +36,12 @@ function OrdemServicoRowActions({ ordem }: { ordem: OrdemServico }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
         <DropdownMenuGroup>
-          <DropdownMenuItem render={<Link to='/ordens-servico/$id' params={{ id: ordem.id }} />}>
+          <DropdownMenuItem onClick={() => onEdit(ordem)}>
             <EyeIcon className='size-4' />
             <span>Visualizar</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => toast.success(`Ordem de serviço ${ordem.codigo} atualizada com sucesso`)}>
+          <DropdownMenuItem onClick={() => onEdit(ordem)}>
             <span>Editar</span>
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => toast.success(`Status da ordem ${ordem.codigo} atualizado`)}>
@@ -56,7 +59,7 @@ function OrdemServicoRowActions({ ordem }: { ordem: OrdemServico }) {
   )
 }
 
-const columns: ColumnDef<OrdemServico>[] = [
+const getColumns = (onEdit: (ordem: OrdemServico) => void): ColumnDef<OrdemServico>[] => [
   { accessorKey: 'codigo', header: 'Código' },
   { accessorKey: 'cliente', header: 'Cliente' },
   { accessorKey: 'equipamento', header: 'Equipamento' },
@@ -73,26 +76,41 @@ const columns: ColumnDef<OrdemServico>[] = [
   {
     id: 'actions',
     header: () => 'Ações',
-    cell: ({ row }) => <OrdemServicoRowActions ordem={row.original} />,
+    cell: ({ row }) => <OrdemServicoRowActions ordem={row.original} onEdit={onEdit} />,
     size: 60,
     enableHiding: false
   }
 ]
 
 const OrdensServico = () => {
-  const navigate = useNavigate()
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [, setVersion] = useState(0)
+  const [editing, setEditing] = useState<OrdemServico | undefined>()
+
+  const openDialog = (ordem?: OrdemServico) => {
+    setEditing(ordem)
+    setDialogOpen(true)
+  }
 
   return (
-    <SimpleListView
-      title='Ordens de Serviço'
-      description='Gestão das ordens de serviço de manutenção e reparo de compressores.'
-      searchPlaceholder='Buscar ordem de serviço'
-      actionLabel='Nova Ordem de Serviço'
-      columns={columns}
-      data={ordensServicoData}
-      onRowClick={ordem => navigate({ to: '/ordens-servico/$id', params: { id: ordem.id } })}
-      onActionClick={() => toast.success('Ordem de serviço criada com sucesso')}
-    />
+    <>
+      <SimpleListView
+        title='Ordens de Serviço'
+        description='Gestão das ordens de serviço de manutenção e reparo de compressores.'
+        searchPlaceholder='Buscar ordem de serviço'
+        actionLabel='Nova Ordem de Serviço'
+        columns={getColumns(openDialog)}
+        data={[...ordensServicoData]}
+        onRowClick={ordem => openDialog(ordem)}
+        onActionClick={() => openDialog()}
+      />
+      <OrdemServicoFormDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        ordem={editing}
+        onSaved={() => setVersion(v => v + 1)}
+      />
+    </>
   )
 }
 
