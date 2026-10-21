@@ -155,7 +155,15 @@ export const MailDisplayContent = ({ email }: { email: Email }) => {
         <Separator orientation='vertical' className='hidden h-6 data-vertical:self-center lg:block' />
         <div className='hidden min-w-0 flex-1 items-center gap-2 lg:flex'>
           <Tooltip>
-            <TooltipTrigger render={<Button variant='ghost' size='icon' title={email.isStarred ? 'Remover estrela' : 'Marcar com estrela'} />}>
+            <TooltipTrigger
+              render={
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  title={email.isStarred ? 'Remover estrela' : 'Marcar com estrela'}
+                />
+              }
+            >
               <StarIcon className={cn('size-4', email.isStarred && 'fill-primary text-primary')} />
               <span className='sr-only'>{email.isStarred ? 'Remover estrela' : 'Marcar com estrela'}</span>
             </TooltipTrigger>
@@ -207,7 +215,9 @@ export const MailDisplayContent = ({ email }: { email: Email }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
               <DropdownMenuItem>{email.isRead ? 'Marcar como não lida' : 'Marcar como lida'}</DropdownMenuItem>
-              <DropdownMenuItem>{email.isStarred ? 'Remover estrela da conversa' : 'Marcar conversa com estrela'}</DropdownMenuItem>
+              <DropdownMenuItem>
+                {email.isStarred ? 'Remover estrela da conversa' : 'Marcar conversa com estrela'}
+              </DropdownMenuItem>
               {(email.status === 'inbox' || email.status === 'sent' || email.status === 'drafts') && (
                 <DropdownMenuItem>Arquivar</DropdownMenuItem>
               )}
@@ -221,7 +231,9 @@ export const MailDisplayContent = ({ email }: { email: Email }) => {
                 email.status === 'sent' ||
                 email.status === 'drafts' ||
                 email.status === 'spam' ||
-                email.status === 'archive') && <DropdownMenuItem variant='destructive'>Mover para a lixeira</DropdownMenuItem>}
+                email.status === 'archive') && (
+                <DropdownMenuItem variant='destructive'>Mover para a lixeira</DropdownMenuItem>
+              )}
               {(email.status === 'spam' || email.status === 'trash') && (
                 <DropdownMenuItem variant='destructive'>Excluir permanentemente</DropdownMenuItem>
               )}

@@ -6,7 +6,7 @@ import ProductInsightsCard from '@/views/dashboards/widgets/widget-product-insig
 import SalesMetricsCard from '@/views/dashboards/charts/chart-sales-metrics'
 import StatisticsCard from '@/views/dashboards/statistics/statistics-card-01'
 import TotalEarningCard from '@/views/dashboards/widgets/widget-total-earning'
-import TransactionDatatable, { type Item } from '@/views/datatables/datatable-transaction'
+import RecentOrdensServico from '@/views/dashboards/tables/recent-ordens-servico'
 
 import { formatCurrencyBRL } from '@/lib/utils'
 
@@ -50,110 +50,6 @@ const earningData = [
   }
 ]
 
-// Transaction table data
-const transactionData: Item[] = [
-  {
-    id: '1',
-    avatar: '/images/avatars/avatar-1.webp',
-    avatarFallback: 'JP',
-    name: 'João Pereira',
-    amount: 316.0,
-    status: 'paid',
-    email: 'joao.pereira@example.com',
-    paidBy: 'mastercard'
-  },
-  {
-    id: '2',
-    avatar: '/images/avatars/avatar-2.webp',
-    avatarFallback: 'MG',
-    name: 'Maria Gonçalves',
-    amount: 253.4,
-    status: 'pending',
-    email: 'maria.goncalves@example.com',
-    paidBy: 'visa'
-  },
-  {
-    id: '3',
-    avatar: '/images/avatars/avatar-3.webp',
-    avatarFallback: 'RA',
-    name: 'Roberto Almeida',
-    amount: 852.0,
-    status: 'paid',
-    email: 'roberto.almeida@example.com',
-    paidBy: 'mastercard'
-  },
-  {
-    id: '4',
-    avatar: '/images/avatars/avatar-4.webp',
-    avatarFallback: 'FL',
-    name: 'Fernanda Lima',
-    amount: 889.0,
-    status: 'pending',
-    email: 'fernanda.lima@example.com',
-    paidBy: 'visa'
-  },
-  {
-    id: '5',
-    avatar: '/images/avatars/avatar-5.webp',
-    avatarFallback: 'CS',
-    name: 'Carlos Eduardo Santos',
-    amount: 723.16,
-    status: 'paid',
-    email: 'carlos.santos@example.com',
-    paidBy: 'mastercard'
-  },
-  {
-    id: '6',
-    avatar: '/images/avatars/avatar-6.webp',
-    avatarFallback: 'JR',
-    name: 'Juliana Ribeiro',
-    amount: 612.0,
-    status: 'failed',
-    email: 'juliana.ribeiro@example.com',
-    paidBy: 'mastercard'
-  },
-  {
-    id: '7',
-    avatar: '/images/avatars/avatar-7.webp',
-    avatarFallback: 'PH',
-    name: 'Paulo Henrique Souza',
-    amount: 445.25,
-    status: 'paid',
-    email: 'paulo.souza@example.com',
-    paidBy: 'visa'
-  },
-  {
-    id: '8',
-    avatar: '/images/avatars/avatar-8.webp',
-    avatarFallback: 'MO',
-    name: 'Marina Oliveira Costa',
-    amount: 297.8,
-    status: 'processing',
-    email: 'marina.costa@example.com',
-    paidBy: 'mastercard'
-  },
-  {
-    id: '9',
-    avatar: '/images/avatars/avatar-9.webp',
-    avatarFallback: 'TP',
-    name: 'Thiago Pires',
-    amount: 756.9,
-    status: 'paid',
-    email: 'thiago.pires@example.com',
-    paidBy: 'visa'
-  },
-  {
-    id: '10',
-    avatar: '/images/avatars/avatar-10.webp',
-    avatarFallback: 'AC',
-    name: 'Amanda Castro',
-    amount: 189.5,
-    status: 'pending',
-    email: 'amanda.castro@example.com',
-    paidBy: 'mastercard'
-  }
-]
-
 const DashboardHome = () => {
   return (
     <div className='grid grid-cols-2 gap-6 lg:grid-cols-3'>
@@ -189,7 +85,7 @@ const DashboardHome = () => {
       <SalesMetricsCard className='col-span-full *:data-[slot=card-content]:space-y-6 xl:col-span-2' />
 
       <Card className='col-span-full w-full py-0'>
-        <TransactionDatatable data={transactionData} />
+        <RecentOrdensServico />
       </Card>
     </div>
   )

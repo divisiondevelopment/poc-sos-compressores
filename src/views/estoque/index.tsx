@@ -1,93 +1,149 @@
+'use client'
+
+// React Imports
+import { useState } from 'react'
+
 // Third-party Imports
 import type { ColumnDef } from '@tanstack/react-table'
 
+import { EllipsisVerticalIcon } from 'lucide-react'
+import { toast } from 'sonner'
+
 // Component Imports
-import { createListActionsColumn } from '@/components/shared/ListRowActions'
 import { SimpleListView } from '@/components/shared/SimpleListView'
 import { StatusBadge } from '@/components/shared/StatusBadge'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import { ItemEstoqueFormDialog } from '@/views/estoque/item-estoque-form-dialog'
 
-type ItemEstoque = {
-  id: string
-  codigo: string
-  nome: string
-  categoria: string
-  quantidade: number
-  status: 'Em estoque' | 'Estoque baixo' | 'Sem estoque'
-}
+// Data Imports
+import { getStatusEstoque, itensEstoqueData, type ItemEstoque } from '@/fake-db/estoque/itens'
 
-const itensData: ItemEstoque[] = [
+// Util Imports
+import { cn, formatCurrencyBRL } from '@/lib/utils'
+
+const getColumns = (onOpen: (item: ItemEstoque) => void): ColumnDef<ItemEstoque>[] => [
+  { accessorKey: 'codigo', header: 'Código' },
   {
-    id: '1',
-    codigo: 'PC-1001',
-    nome: 'Compressor Parafuso 50HP',
-    categoria: 'Equipamentos',
-    quantidade: 4,
-    status: 'Em estoque'
+    accessorKey: 'nome',
+    header: 'Item',
+    cell: ({ row }) => (
+      <div className='flex flex-col text-sm'>
+        <span className='font-medium'>{row.original.nome}</span>
+        <span className='text-muted-foreground'>{row.original.categoria}</span>
+      </div>
+    )
+  },
+  { accessorKey: 'tipo', header: 'Tipo' },
+  {
+    accessorKey: 'quantidade',
+    header: 'Quantidade',
+    cell: ({ row }) => {
+      const { quantidade, estoqueMinimo, estoqueMaximo, unidade } = row.original
+      const status = getStatusEstoque(row.original)
+      const nivel = estoqueMaximo > 0 ? Math.min((quantidade / estoqueMaximo) * 100, 100) : 0
+
+      return (
+        <div className='flex min-w-28 flex-col gap-1.5'>
+          <span className='text-sm font-medium'>
+            {quantidade} {unidade}
+          </span>
+          <div className='bg-muted h-1.5 overflow-hidden rounded-full'>
+            <div
+              className={cn(
+                'h-full rounded-full',
+                status === 'Em estoque' ? 'bg-primary' : status === 'Estoque baixo' ? 'bg-amber-500' : 'bg-destructive'
+              )}
+              style={{ width: `${nivel}%` }}
+            />
+          </div>
+          <span className='text-muted-foreground text-xs'>mín. {estoqueMinimo}</span>
+        </div>
+      )
+    }
   },
   {
-    id: '2',
-    codigo: 'PC-1002',
-    nome: 'Filtro de Ar FA-220',
-    categoria: 'Filtros',
-    quantidade: 2,
-    status: 'Estoque baixo'
+    accessorKey: 'precoMedio',
+    header: 'Preço médio',
+    cell: ({ row }) => <span className='whitespace-nowrap'>{formatCurrencyBRL(row.original.precoMedio)}</span>
   },
   {
-    id: '3',
-    codigo: 'PC-1003',
-    nome: 'Óleo Lubrificante Sintético 5L',
-    categoria: 'Lubrificantes',
-    quantidade: 18,
-    status: 'Em estoque'
+    id: 'valorEstoque',
+    header: 'Valor em estoque',
+    cell: ({ row }) => (
+      <span className='whitespace-nowrap'>{formatCurrencyBRL(row.original.quantidade * row.original.precoMedio)}</span>
+    )
+  },
+  { accessorKey: 'localizacao', header: 'Localização' },
+  {
+    id: 'status',
+    header: 'Status',
+    cell: ({ row }) => <StatusBadge>{getStatusEstoque(row.original)}</StatusBadge>
   },
   {
-    id: '4',
-    codigo: 'PC-1004',
-    nome: 'Correia Industrial B-52',
-    categoria: 'Correias',
-    quantidade: 0,
-    status: 'Sem estoque'
-  },
-  {
-    id: '5',
-    codigo: 'PC-1005',
-    nome: 'Válvula de Segurança 1/2"',
-    categoria: 'Peças',
-    quantidade: 9,
-    status: 'Em estoque'
-  },
-  {
-    id: '6',
-    codigo: 'PC-1006',
-    nome: 'Kit Reparo Compressor Pistão',
-    categoria: 'Peças',
-    quantidade: 3,
-    status: 'Estoque baixo'
+    id: 'actions',
+    header: () => 'Ações',
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger render={<Button size='icon' variant='ghost' aria-label='Abrir ações' />}>
+          <EllipsisVerticalIcon className='size-5' aria-hidden='true' />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align='end'>
+          <DropdownMenuGroup>
+            <DropdownMenuItem onClick={() => onOpen(row.original)}>
+              <span>Editar</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onOpen(row.original)}>
+              <span>Ajustar estoque</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem variant='destructive' onClick={() => toast.success(`Item ${row.original.nome} excluído`)}>
+              <span>Excluir</span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+    size: 60,
+    enableHiding: false
   }
 ]
 
-const columns: ColumnDef<ItemEstoque>[] = [
-  { accessorKey: 'codigo', header: 'Código' },
-  { accessorKey: 'nome', header: 'Item' },
-  { accessorKey: 'categoria', header: 'Categoria' },
-  { accessorKey: 'quantidade', header: 'Quantidade' },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => <StatusBadge>{row.original.status}</StatusBadge>
-  },
-  createListActionsColumn<ItemEstoque>()
-]
+const EstoqueItens = () => {
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [editing, setEditing] = useState<ItemEstoque | undefined>()
+  const [, setVersion] = useState(0)
 
-const EstoqueItens = () => (
-  <SimpleListView
-    title='Itens'
-    description='Consulta e gestão dos itens de estoque: peças, insumos e equipamentos.'
-    searchPlaceholder='Buscar item'
-    actionLabel='Novo Item'
-    columns={columns}
-    data={itensData}
-  />
-)
+  const openDialog = (item?: ItemEstoque) => {
+    setEditing(item)
+    setDialogOpen(true)
+  }
+
+  return (
+    <>
+      <SimpleListView
+        title='Itens'
+        description='Consulta e gestão dos itens de estoque: peças, insumos e equipamentos.'
+        searchPlaceholder='Buscar item'
+        actionLabel='Novo Item'
+        columns={getColumns(openDialog)}
+        data={[...itensEstoqueData]}
+        onRowClick={openDialog}
+        onActionClick={() => openDialog()}
+      />
+      <ItemEstoqueFormDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        item={editing}
+        onSaved={() => setVersion(v => v + 1)}
+      />
+    </>
+  )
+}
 
 export default EstoqueItens

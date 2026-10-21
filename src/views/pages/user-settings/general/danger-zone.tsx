@@ -47,8 +47,7 @@ const DangerZone = () => {
                   <DialogHeader className='space-y-2'>
                     <DialogTitle>Excluir conta</DialogTitle>
                     <div className='text-muted-foreground text-sm'>
-                      Exclua sua conta permanentemente. Esta ação removerá todos os seus dados e não pode ser
-                      desfeita.
+                      Exclua sua conta permanentemente. Esta ação removerá todos os seus dados e não pode ser desfeita.
                     </div>
                   </DialogHeader>
                   <div className='flex flex-col-reverse gap-4 sm:flex-row sm:justify-end'>

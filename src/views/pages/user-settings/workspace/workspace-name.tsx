@@ -52,7 +52,9 @@ const WorkspaceName = () => {
         {/* Workspace Name */}
         <div className='flex flex-col space-y-1'>
           <h3 className='text-base font-semibold'>Nome do Workspace e Fuso Horário</h3>
-          <p className='text-muted-foreground text-sm'>Gerencie o nome do seu workspace e as configurações de fuso horário.</p>
+          <p className='text-muted-foreground text-sm'>
+            Gerencie o nome do seu workspace e as configurações de fuso horário.
+          </p>
         </div>
         {/* Content */}
         <div className='space-y-6 lg:col-span-2'>

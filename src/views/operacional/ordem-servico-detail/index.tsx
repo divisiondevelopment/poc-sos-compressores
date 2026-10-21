@@ -1,5 +1,8 @@
 'use client'
 
+// React Imports
+import { useState } from 'react'
+
 // Third-party Imports
 import { getRouteApi, Link } from '@tanstack/react-router'
 
@@ -50,6 +53,7 @@ function OrdemServicoDetailSkeleton() {
 
 function OrdemServicoDetailContent({ id }: { id: string }) {
   const isLoading = useSimulatedLoading(400)
+  const [version, setVersion] = useState(0)
   const ordem = getOrdemServicoById(id)
 
   if (isLoading) {
@@ -71,8 +75,8 @@ function OrdemServicoDetailContent({ id }: { id: string }) {
 
   return (
     <div className='grid grid-cols-1 gap-6 lg:grid-cols-[350px_minmax(0,1fr)]'>
-      <OrdemServicoLeftPanel ordem={ordem} />
-      <OrdemServicoTabs ordem={ordem} />
+      <OrdemServicoLeftPanel ordem={ordem} onSaved={() => setVersion(v => v + 1)} />
+      <OrdemServicoTabs key={version} ordem={ordem} />
     </div>
   )
 }
