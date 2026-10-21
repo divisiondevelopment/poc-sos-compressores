@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR" class="flex min-h-full w-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+
+    <title>SOS Compressores</title>
+    <meta name="description" content="Painel de gestão da SOS Compressores." />
+
+    <meta property="og:title" content="SOS Compressores" />
+    <meta property="og:description" content="Painel de gestão da SOS Compressores." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SOS Compressores" />
+    <meta property="og:url" content="%VITE_APP_URL%" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="SOS Compressores" />
+    <meta name="twitter:description" content="Painel de gestão da SOS Compressores." />
+
+    <!-- Apply the saved theme before first paint (same storage key and logic as next-themes) to avoid a flash -->
+    <script>
+      try {
+        var theme = localStorage.getItem('theme') || 'system'
+        var dark = theme === 'dark' || (theme === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.add(dark ? 'dark' : 'light')
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+      } catch (e) {}
+    </script>
+  </head>
+  <body class="flex min-h-full w-full flex-auto flex-col">
+    <div id="root" class="flex min-h-full w-full flex-auto flex-col"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -100,7 +100,7 @@ const SalesMetricsCard = ({ className }: { className?: string }) => {
           <div className='flex flex-col justify-between gap-7 lg:col-span-3'>
             <span className='text-lg font-semibold'>Métricas de vendas</span>
             <div className='flex items-center gap-3'>
-              <img src='/images/brands/logo-square.webp' className='size-10.5 rounded-lg' alt='logo' />
+              <img src='/images/logo.png' className='size-10.5 rounded-lg object-contain' alt='SOS Compressores' />
               <div className='flex flex-col gap-0.5'>
                 <span className='text-xl font-medium'>SOS Compressores</span>
                 <span className='text-muted-foreground text-sm'>contato@soscompressores.com.br</span>

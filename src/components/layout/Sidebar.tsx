@@ -45,9 +45,6 @@ import {
 
 // Config Imports
 import { navItems } from '@/configs/navConfig'
-
-// Data Imports
-import { db as navApps } from '@/fake-db/apps/nav-apps'
 import themeConfig from '@/configs/themeConfig'
 
 // Util Imports
@@ -72,21 +69,6 @@ const NavLink = ({ href, ...props }: { href: string } & Omit<ComponentProps<'a'>
     />
   )
 }
-
-// External apps merged into the "Apps" group
-const externalApps: MenuItem[] = navApps.map(app => ({
-  icon: app.icon as MenuItem['icon'],
-  label: app.name,
-  href: app.href,
-  badge: 'Pro',
-  badgeClassName: 'right-8',
-  ...(app.openInNewTab ? { target: '_blank' as const } : {})
-}))
-
-// Nav groups rendered in the sidebar
-const navGroups = navItems.map(item =>
-  item.groupLabel === 'Apps' ? { ...item, items: item.items.concat(externalApps) } : item
-)
 
 // Key used to track the open state of a nested sub-group, namespaced by its parent
 // so two sub-groups sharing a label in different parents never collide.
@@ -477,7 +459,7 @@ const SidebarLayout = () => {
   const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
 
   const activeBranchKeys = useMemo(
-    () => getActiveBranchKeys(navGroups, pathname, searchParams),
+    () => getActiveBranchKeys(navItems, pathname, searchParams),
     [pathname, searchParams]
   )
 
@@ -512,7 +494,7 @@ const SidebarLayout = () => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent className='group-data-[collapsible=icon]:overflow-y-auto'>
-        {navGroups.map((navItem, index) => {
+        {navItems.map((navItem, index) => {
           return (
             <SidebarGroupedMenuItems
               key={navItem.groupLabel || index}
